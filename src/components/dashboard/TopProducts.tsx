@@ -25,7 +25,7 @@ export function TopProducts({ products }: TopProductsProps) {
                   {product.name}
                 </div>
                 <div className="text-xs text-muted-foreground font-mono">
-                  {product.sku}
+                  {product.code}
                 </div>
               </div>
             </div>

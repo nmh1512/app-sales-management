@@ -18,7 +18,7 @@ export interface ActivityLog {
 export interface ProductRanking {
   id: number;
   name: string;
-  sku: string;
+  code: string;
   total_quantity: number;
   total_revenue: number;
 }
@@ -35,7 +35,7 @@ export interface DashboardData {
 
 export interface Product {
   id: number;
-  sku: string;
+  code: string;
   name: string;
   price: number;
   cost_price: number;
@@ -46,6 +46,13 @@ export interface Product {
   image_url?: string;
   created_at: string;
   properties?: string;
+  barcode?: string;
+  description?: string;
+  order_note?: string;
+  supplier?: string;
+  min_stock?: number;
+  max_stock?: number;
+  note_template?: string;
   is_variant: boolean;
   variants_count?: number;
 }

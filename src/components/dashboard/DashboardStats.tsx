@@ -48,7 +48,7 @@ export function DashboardStats({ stats }: DashboardStatsProps) {
       {items.map((item, index) => (
         <Card key={index} className="border-border">
           <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-            <CardTitle className="text-sm font-medium text-muted-foreground">
+            <CardTitle className="font-medium text-muted-foreground">
               {item.title}
             </CardTitle>
             <div className={`p-2 rounded-lg ${item.bg}`}>
