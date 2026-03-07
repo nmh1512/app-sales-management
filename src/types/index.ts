@@ -56,4 +56,47 @@ export interface Product {
   is_variant: boolean;
   variants_count?: number;
 }
-export const TYPES_STUB = true;
+export interface Category {
+  id: number;
+  name: string;
+  code?: string;
+  description?: string;
+  parent_id?: number;
+  created_at: string;
+  products_count?: number;
+}
+
+export interface Brand {
+  id: number;
+  name: string;
+  description?: string;
+  created_at: string;
+  products_count?: number;
+}
+export interface Order {
+  id: number;
+  code: string;
+  customer_name: string;
+  customer_phone?: string;
+  total_amount: number;
+  discount: number;
+  final_amount: number;
+  paid_amount: number;
+  payment_method: string;
+  status: "completed" | "pending" | "cancelled";
+  seller_name: string;
+  created_at: string;
+}
+
+export interface ReturnOrder {
+  id: number;
+  code: string;
+  order_code?: string;
+  customer_name: string;
+  customer_phone?: string;
+  amount_due: number;
+  amount_paid: number;
+  status: "completed" | "pending";
+  seller_name: string;
+  created_at: string;
+}

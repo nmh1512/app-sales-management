@@ -8,7 +8,21 @@ import { MainLayout } from "./components/layout/MainLayout";
 import { ProtectedRoute } from "./components/layout/ProtectedRoute";
 import DashboardPage from "./pages/DashboardPage";
 import ProductListPage from "./pages/ProductListPage";
+import CategoryListPage from "./pages/CategoryListPage";
+import BrandListPage from "./pages/BrandListPage";
+import OrderListPage from "./pages/OrderListPage";
+import ReturnListPage from "./pages/ReturnListPage";
 import LoginPage from "./pages/LoginPage";
+import PurchaseOrderListPage from "./pages/inventory/PurchaseOrderListPage";
+import SupplierReturnListPage from "./pages/inventory/SupplierReturnListPage";
+import InventoryDisposalListPage from "./pages/inventory/InventoryDisposalListPage";
+import InventoryTransferListPage from "./pages/inventory/InventoryTransferListPage";
+import InventoryAuditListPage from "./pages/inventory/InventoryAuditListPage";
+import PurchaseOrderFormPage from "./pages/inventory/PurchaseOrderFormPage";
+import SupplierReturnFormPage from "./pages/inventory/SupplierReturnFormPage";
+import InventoryDisposalFormPage from "./pages/inventory/InventoryDisposalFormPage";
+import InventoryTransferFormPage from "./pages/inventory/InventoryTransferFormPage";
+import InventoryAuditFormPage from "./pages/inventory/InventoryAuditFormPage";
 
 function AppLayout() {
   return (
@@ -33,6 +47,47 @@ function App() {
         >
           <Route path="/" element={<DashboardPage />} />
           <Route path="/products" element={<ProductListPage />} />
+          <Route path="/categories" element={<CategoryListPage />} />
+          <Route
+            path="/purchase-orders/new"
+            element={<PurchaseOrderFormPage />}
+          />
+          <Route
+            path="/supplier-returns/new"
+            element={<SupplierReturnFormPage />}
+          />
+          <Route
+            path="/inventory-disposals/new"
+            element={<InventoryDisposalFormPage />}
+          />
+          <Route
+            path="/inventory-transfers/new"
+            element={<InventoryTransferFormPage />}
+          />
+          <Route
+            path="/inventory-audits/new"
+            element={<InventoryAuditFormPage />}
+          />
+          <Route path="/brands" element={<BrandListPage />} />
+          <Route path="/orders" element={<OrderListPage />} />
+          <Route path="/returns" element={<ReturnListPage />} />
+          <Route path="/purchase-orders" element={<PurchaseOrderListPage />} />
+          <Route
+            path="/supplier-returns"
+            element={<SupplierReturnListPage />}
+          />
+          <Route
+            path="/inventory-disposals"
+            element={<InventoryDisposalListPage />}
+          />
+          <Route
+            path="/inventory-transfers"
+            element={<InventoryTransferListPage />}
+          />
+          <Route
+            path="/inventory-audits"
+            element={<InventoryAuditListPage />}
+          />
           <Route
             path="*"
             element={

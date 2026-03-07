@@ -255,14 +255,28 @@ export default function ProductListPage() {
       <div className="rounded-lg border border-border bg-card overflow-hidden shadow-none">
         <Table>
           <TableHeader>
-            <TableRow className="bg-muted/50 hover:bg-muted/50 border-b">
-              <TableHead className="w-[80px] text-center">Ảnh</TableHead>
-              <TableHead>Mã hàng</TableHead>
-              <TableHead className="w-[300px]">Tên sản phẩm</TableHead>
-              <TableHead className="text-right">Giá bán</TableHead>
-              <TableHead className="text-right">Giá vốn</TableHead>
-              <TableHead className="text-center">Tồn kho</TableHead>
-              <TableHead>Thời gian</TableHead>
+            <TableRow className="bg-muted/50 hover:bg-muted/50 border-b text-xs">
+              <TableHead className="w-[80px] text-center text-xs font-bold uppercase">
+                Ảnh
+              </TableHead>
+              <TableHead className="text-xs font-bold uppercase">
+                Mã hàng
+              </TableHead>
+              <TableHead className="w-[300px] text-xs font-bold uppercase">
+                Tên sản phẩm
+              </TableHead>
+              <TableHead className="text-right text-xs font-bold uppercase">
+                Giá bán
+              </TableHead>
+              <TableHead className="text-right text-xs font-bold uppercase">
+                Giá vốn
+              </TableHead>
+              <TableHead className="text-center text-xs font-bold uppercase">
+                Tồn kho
+              </TableHead>
+              <TableHead className="text-xs font-bold uppercase">
+                Thời gian
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
