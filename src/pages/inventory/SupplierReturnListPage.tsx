@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Plus, Search, Filter, Download, Calendar } from "lucide-react";
+
+import { Plus, Filter, Download, Calendar } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -12,6 +12,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
+import { SearchInput } from "@/components/ui/search-input";
 import { InventoryDetailModal } from "@/components/inventory/InventoryDetailModal";
 
 export default function SupplierReturnListPage() {
@@ -47,81 +48,76 @@ export default function SupplierReturnListPage() {
   };
 
   return (
-    <div className="p-6 space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <h1 className="text-2xl font-black uppercase tracking-tight text-slate-800">
-          Trả hàng nhập
-        </h1>
-        <div className="flex gap-2">
-          <Button
-            variant="outline"
-            className="gap-2 rounded-lg border-slate-200 hover:bg-slate-50 transition-all font-bold text-slate-600"
-          >
+    <div className="p-6 space-y-6 bg-background min-h-screen">
+      <div className="flex flex-col md:flex-row md:justify-between items-start md:items-center gap-4">
+        <h1 className="text-2xl font-bold">Trả hàng nhập</h1>
+        <div className="flex flex-wrap gap-2">
+          <Button variant="outline" className="gap-2 px-6">
             <Download className="h-4 w-4" /> Xuất file
           </Button>
           <Link to="/supplier-returns/new">
-            <Button className="gap-2 rounded-lg h-10 px-6 bg-primary text-primary-foreground hover:bg-primary/90 transition-all active:scale-95 shadow-lg shadow-primary/20 font-black uppercase tracking-wider text-xs">
+            <Button className="gap-2 bg-primary hover:bg-primary/90 px-6 font-medium">
               <Plus className="h-4 w-4" /> Trả hàng nhập
             </Button>
           </Link>
         </div>
       </div>
 
-      <div className="bg-card rounded-2xl border shadow-sm overflow-hidden">
-        <div className="p-4 bg-slate-50/50 border-b border-dashed flex flex-wrap items-center gap-3">
-          <div className="relative max-w-sm flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input
-              placeholder="Theo mã trả hàng, mã nhập..."
-              className="pl-10 h-10 rounded-lg border-muted-foreground/20 focus:border-primary focus:ring-primary/20 bg-white"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </div>
+      <div className="bg-card rounded-lg border border-border p-6 shadow-none flex flex-col gap-4">
+        <div className="flex flex-wrap items-center gap-3">
+          <SearchInput
+            placeholder="Theo mã trả hàng, mã nhập..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            wrapperClassName="max-w-sm flex-1"
+          />
           <Button
             variant="outline"
-            className="h-10 gap-2 rounded-lg border-slate-200 bg-white font-bold text-slate-600 shadow-sm"
+            className="h-10 gap-2 border-border font-medium"
           >
-            <Calendar className="h-4 w-4 text-slate-400" /> Thời gian
+            <Calendar className="h-4 w-4" /> Thời gian
           </Button>
           <Button
             variant="outline"
-            className="h-10 gap-2 rounded-lg border-slate-200 bg-white font-bold text-slate-600 shadow-sm"
+            className="h-10 gap-2 border-border font-medium"
           >
-            <Filter className="h-4 w-4 text-slate-400" /> Lọc thêm
+            <Filter className="h-4 w-4" /> Lọc thêm
           </Button>
         </div>
 
-        <div className="overflow-hidden overflow-x-auto">
+        <div className="rounded-lg border border-border bg-card overflow-hidden shadow-none overflow-x-auto">
           <Table>
-            <TableHeader className="bg-slate-100/50">
-              <TableRow className="hover:bg-transparent">
-                <TableHead className="text-xs font-black uppercase tracking-widest py-4 text-slate-500">
+            <TableHeader>
+              <TableRow className="bg-muted/50 hover:bg-muted/50 border-b text-xs">
+                <TableHead className="text-xs font-bold uppercase w-[150px]">
                   Số phiếu
                 </TableHead>
-                <TableHead className="text-xs font-black uppercase tracking-widest py-4 text-slate-500">
+                <TableHead className="text-xs font-bold uppercase w-[200px]">
                   Nhà cung cấp
                 </TableHead>
-                <TableHead className="text-xs font-black uppercase tracking-widest py-4 text-slate-500 text-center">
+                <TableHead className="text-xs font-bold uppercase text-center w-[120px]">
                   Ngày trả
                 </TableHead>
-                <TableHead className="text-xs font-black uppercase tracking-widest py-4 text-slate-500 text-right">
+                <TableHead className="text-xs font-bold uppercase text-right w-[150px]">
                   Tiền hàng trả
                 </TableHead>
-                <TableHead className="text-xs font-black uppercase tracking-widest py-4 text-slate-500 text-right">
+                <TableHead className="text-xs font-bold uppercase text-right w-[120px]">
                   Giảm giá
                 </TableHead>
-                <TableHead className="text-xs font-black uppercase tracking-widest py-4 text-slate-500 text-right">
+                <TableHead className="text-xs font-bold uppercase text-right w-[150px]">
                   NCC cần trả
                 </TableHead>
-                <TableHead className="text-xs font-black uppercase tracking-widest py-4 text-slate-500 text-right">
+                <TableHead className="text-xs font-bold uppercase text-right w-[150px]">
                   NCC đã trả
                 </TableHead>
-                <TableHead className="text-xs font-black uppercase tracking-widest py-4 text-slate-500 text-center">
+                <TableHead className="text-xs font-bold uppercase text-center w-[150px]">
                   Trạng thái
                 </TableHead>
-                <TableHead className="text-xs font-black uppercase tracking-widest py-4 text-slate-500">
+                <TableHead className="text-xs font-bold uppercase w-[150px]">
                   Người tạo
+                </TableHead>
+                <TableHead className="text-xs font-bold uppercase w-[150px]">
+                  Ngày tạo
                 </TableHead>
               </TableRow>
             </TableHeader>
@@ -130,53 +126,47 @@ export default function SupplierReturnListPage() {
                 <TableRow
                   key={item.id}
                   onClick={() => handleRowClick(item)}
-                  className="hover:bg-primary/[0.02] active:bg-primary/[0.05] transition-colors border-b cursor-pointer group whitespace-nowrap"
+                  className="cursor-pointer transition-colors hover:bg-muted/30 border-b whitespace-nowrap"
                 >
-                  <TableCell className="py-5">
-                    <div className="flex flex-col">
-                      <span className="font-black text-sm text-primary underline underline-offset-4 decoration-primary/20 group-hover:decoration-primary/50">
-                        {item.code}
-                      </span>
-                      <span className="text-xs text-slate-400 font-normal">
-                        {item.subId}
-                      </span>
+                  <TableCell>
+                    <div className="font-mono text-xs">{item.code}</div>
+                    <div className="text-xs text-muted-foreground mt-0.5">
+                      {item.subId}
                     </div>
                   </TableCell>
-                  <TableCell className="py-5 text-sm font-bold text-slate-600">
+                  <TableCell className="font-medium text-sm">
                     {item.supplier}
                   </TableCell>
-                  <TableCell className="py-5 text-center text-sm text-slate-500 font-medium">
+                  <TableCell className="text-center text-sm text-muted-foreground">
                     {item.date}
                   </TableCell>
-                  <TableCell className="py-5 text-right">
-                    <div className="flex flex-col font-black text-sm text-slate-700">
-                      <span>{formatCurrency(item.total_amount)}</span>
+                  <TableCell className="text-right">
+                    <div className="font-medium text-sm">
+                      {formatCurrency(item.total_amount)}
                     </div>
                   </TableCell>
-                  <TableCell className="py-5 text-right text-sm font-medium text-slate-500">
+                  <TableCell className="text-right text-sm text-muted-foreground">
                     {formatCurrency(item.discount)}
                   </TableCell>
-                  <TableCell className="py-5 text-right font-black text-sm text-orange-600">
+                  <TableCell className="text-right font-medium text-sm">
                     {formatCurrency(item.due_from_supplier)}
                   </TableCell>
-                  <TableCell className="py-5 text-right text-sm font-bold text-green-600">
+                  <TableCell className="text-right text-sm text-muted-foreground">
                     {formatCurrency(item.received_from_supplier)}
                   </TableCell>
-                  <TableCell className="py-5 text-center">
-                    <Badge className="bg-orange-50 text-orange-600 hover:bg-orange-50 border-none rounded-full px-3 py-1 text-xs font-bold ring-1 ring-orange-500/10">
-                      <div className="w-1.5 h-1.5 rounded-full bg-orange-500 mr-2 inline-block"></div>
+                  <TableCell className="text-center">
+                    <Badge
+                      variant="outline"
+                      className="rounded-full px-2 py-0 h-5 text-sm font-normal border-border"
+                    >
                       {item.status}
                     </Badge>
                   </TableCell>
-                  <TableCell className="py-5">
-                    <div className="flex flex-col gap-0.5">
-                      <span className="text-sm font-bold text-slate-600">
-                        {item.creator}
-                      </span>
-                      <span className="text-xs text-slate-400 font-normal">
-                        {item.created_at}
-                      </span>
-                    </div>
+                  <TableCell className="text-sm font-medium">
+                    {item.creator}
+                  </TableCell>
+                  <TableCell className="text-sm text-muted-foreground">
+                    {item.created_at}
                   </TableCell>
                 </TableRow>
               ))}

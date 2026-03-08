@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -22,7 +22,6 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Plus,
-  Search,
   RefreshCw,
   FileText,
   Download,
@@ -32,16 +31,9 @@ import {
   Lock,
   Trash2,
 } from "lucide-react";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import {
-  ProductForm,
-  type ProductFormValues,
-} from "@/components/products/ProductForm";
+import { type ProductFormValues } from "@/components/products/ProductForm";
+import { ProductModal } from "@/components/inventory/ProductModal";
+import { SearchInput } from "@/components/ui/search-input";
 import type { Product } from "@/types";
 
 export default function ProductListPage() {
@@ -121,35 +113,6 @@ export default function ProductListPage() {
     setExpandedRow(expandedRow === id ? null : id);
   };
 
-  // Maps Product type to ProductFormValues
-  const getProductInitialData = (
-    p: Product | null,
-  ): Partial<ProductFormValues> | undefined => {
-    if (!p) return undefined;
-
-    return {
-      code: p.code,
-      name: p.name,
-      price: p.price,
-      cost_price: p.cost_price,
-      stock: p.stock,
-      unit: p.unit,
-      barcode: p.barcode || "",
-      brand_id: "1", // Mock mapping
-      category_id: "1", // Mock mapping
-      status: "active",
-      display_on_sale: "show",
-      description: p.description || "",
-      note_template: p.note_template || "",
-      order_note: p.order_note || "",
-      supplier: p.supplier || "",
-      min_stock: p.min_stock ?? 0,
-      max_stock: p.max_stock ?? 99999999,
-      attributes: [],
-      images: p.image_url ? [{ url: p.image_url, isPrimary: true }] : [],
-    };
-  };
-
   return (
     <div className="p-6 space-y-6 bg-background min-h-screen">
       <div className="flex flex-col md:flex-row md:justify-between items-start md:items-center gap-4">
@@ -169,21 +132,12 @@ export default function ProductListPage() {
             <Plus className="h-4 w-4" /> Thêm sản phẩm
           </Button>
 
-          <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-            <DialogContent className="max-w-4xl max-h-[95vh] overflow-y-auto scrollbar-hide p-0 border-border rounded-lg">
-              <DialogHeader className="p-6 pb-0">
-                <DialogTitle className="text-xl font-semibold">
-                  {editingProduct ? "Cập nhật sản phẩm" : "Thêm mới sản phẩm"}
-                </DialogTitle>
-              </DialogHeader>
-              <div className="p-6 pt-2">
-                <ProductForm
-                  initialData={getProductInitialData(editingProduct)}
-                  onSubmit={handleSaveProduct}
-                />
-              </div>
-            </DialogContent>
-          </Dialog>
+          <ProductModal
+            open={isModalOpen}
+            onOpenChange={setIsModalOpen}
+            product={editingProduct}
+            onSuccess={handleSaveProduct}
+          />
         </div>
       </div>
 
@@ -191,13 +145,7 @@ export default function ProductListPage() {
         <CardContent className="p-6">
           <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-7 gap-4">
             <div className="col-span-1 md:col-span-2">
-              <div className="relative">
-                <Search className="absolute left-2.5 top-3 h-4 w-4 text-muted-foreground" />
-                <Input
-                  placeholder="Tìm theo mã, tên sản phẩm..."
-                  className="pl-9 h-10 shadow-none border-border"
-                />
-              </div>
+              <SearchInput placeholder="Tìm theo mã, tên sản phẩm..." />
             </div>
             <div>
               <Select>

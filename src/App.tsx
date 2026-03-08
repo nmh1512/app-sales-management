@@ -41,63 +41,69 @@ function App() {
         <Route
           element={
             <ProtectedRoute>
-              <AppLayout />
+              <Outlet />
             </ProtectedRoute>
           }
         >
-          <Route path="/" element={<DashboardPage />} />
-          <Route path="/products" element={<ProductListPage />} />
-          <Route path="/categories" element={<CategoryListPage />} />
-          <Route
-            path="/purchase-orders/new"
-            element={<PurchaseOrderFormPage />}
-          />
-          <Route
-            path="/supplier-returns/new"
-            element={<SupplierReturnFormPage />}
-          />
-          <Route
-            path="/inventory-disposals/new"
-            element={<InventoryDisposalFormPage />}
-          />
-          <Route
-            path="/inventory-transfers/new"
-            element={<InventoryTransferFormPage />}
-          />
-          <Route
-            path="/inventory-audits/new"
-            element={<InventoryAuditFormPage />}
-          />
-          <Route path="/brands" element={<BrandListPage />} />
-          <Route path="/orders" element={<OrderListPage />} />
-          <Route path="/returns" element={<ReturnListPage />} />
-          <Route path="/purchase-orders" element={<PurchaseOrderListPage />} />
-          <Route
-            path="/supplier-returns"
-            element={<SupplierReturnListPage />}
-          />
-          <Route
-            path="/inventory-disposals"
-            element={<InventoryDisposalListPage />}
-          />
-          <Route
-            path="/inventory-transfers"
-            element={<InventoryTransferListPage />}
-          />
-          <Route
-            path="/inventory-audits"
-            element={<InventoryAuditListPage />}
-          />
-          <Route
-            path="*"
-            element={
-              <div className="flex items-center justify-center h-full">
-                <h1 className="text-xl text-muted-foreground">
-                  Tính năng đang phát triển
-                </h1>
-              </div>
-            }
-          />
+          {/* Pages with MainLayout */}
+          <Route element={<AppLayout />}>
+            <Route path="/" element={<DashboardPage />} />
+            <Route path="/products" element={<ProductListPage />} />
+            <Route path="/categories" element={<CategoryListPage />} />
+            <Route
+              path="/purchase-orders/new"
+              element={<PurchaseOrderFormPage />}
+            />
+            <Route
+              path="/supplier-returns/new"
+              element={<SupplierReturnFormPage />}
+            />
+            <Route
+              path="/inventory-disposals/new"
+              element={<InventoryDisposalFormPage />}
+            />
+            <Route
+              path="/inventory-transfers/new"
+              element={<InventoryTransferFormPage />}
+            />
+            <Route
+              path="/inventory-audits/new"
+              element={<InventoryAuditFormPage />}
+            />
+            <Route path="/brands" element={<BrandListPage />} />
+            <Route path="/orders" element={<OrderListPage />} />
+            <Route path="/returns" element={<ReturnListPage />} />
+            <Route
+              path="/purchase-orders"
+              element={<PurchaseOrderListPage />}
+            />
+            <Route
+              path="/supplier-returns"
+              element={<SupplierReturnListPage />}
+            />
+            <Route
+              path="/inventory-disposals"
+              element={<InventoryDisposalListPage />}
+            />
+            <Route
+              path="/inventory-transfers"
+              element={<InventoryTransferListPage />}
+            />
+            <Route
+              path="/inventory-audits"
+              element={<InventoryAuditListPage />}
+            />
+            <Route
+              path="*"
+              element={
+                <div className="flex items-center justify-center h-full">
+                  <h1 className="text-xl text-muted-foreground">
+                    Tính năng đang phát triển
+                  </h1>
+                </div>
+              }
+            />
+          </Route>
         </Route>
       </Routes>
     </Router>

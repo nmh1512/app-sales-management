@@ -68,107 +68,91 @@ export function OrderDetailModal({
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
             {/* Customer Column */}
             <div className="space-y-4">
-              <div className="flex items-center gap-2 text-primary font-bold border-b pb-2">
+              <div className="flex items-center gap-2 text-primary font-bold border-b border-border pb-2">
                 <User size={18} />
                 <span className="text-sm uppercase tracking-wide">
                   Khách hàng
                 </span>
               </div>
-              <div className="space-y-3">
-                <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground font-medium">
-                    Tên khách:
-                  </span>
-                  <span className="font-semibold text-right text-sm">
-                    {order.customer_name}
-                  </span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground font-medium text-sm">
-                    Điện thoại:
-                  </span>
-                  <span className="font-semibold text-right text-sm">
-                    {order.customer_phone || "---"}
-                  </span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground font-medium text-sm">
-                    Email:
-                  </span>
-                  <span className="italic text-muted-foreground text-right text-sm">
-                    Chưa có
-                  </span>
-                </div>
+              <div className="space-y-0">
+                {[
+                  { label: "Tên khách:", value: order.customer_name },
+                  {
+                    label: "Điện thoại:",
+                    value: order.customer_phone || "---",
+                  },
+                  { label: "Email:", value: "Chưa có" },
+                ].map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="flex justify-between items-center py-2.5 border-b border-border/50 text-sm"
+                  >
+                    <span className="text-muted-foreground">{item.label}</span>
+                    <span className="font-medium text-right">{item.value}</span>
+                  </div>
+                ))}
               </div>
             </div>
 
             {/* Order Information Column */}
-            <div className="space-y-4 border-l border-r px-6">
-              <div className="flex items-center gap-2 text-primary font-bold border-b pb-2">
+            <div className="space-y-3 border-l border-r px-6">
+              <div className="flex items-center gap-2 text-primary font-bold border-b border-border pb-2">
                 <FileText size={18} />
                 <span className="text-sm uppercase tracking-wide">
                   Thông tin {isReturn ? "trả" : "bán"}
                 </span>
               </div>
-              <div className="space-y-3">
-                <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground font-medium text-sm">
+              <div className="space-y-0">
+                <div className="flex justify-between items-center py-2.5 border-b border-border/50 text-sm">
+                  <span className="text-muted-foreground">
                     Mã {isReturn ? "trả" : "đơn"}:
                   </span>
-                  <span className="font-semibold text-right text-sm">
-                    {order.code}
-                  </span>
+                  <span className="font-medium text-right">{order.code}</span>
                 </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground font-medium text-sm">
-                    Trạng thái:
-                  </span>
+                <div className="flex justify-between items-center py-2.5 border-b border-border/50 text-sm">
+                  <span className="text-muted-foreground">Trạng thái:</span>
                   <Badge className="bg-green-100 text-green-700 hover:bg-green-100 border-none shadow-none rounded font-bold h-6 text-xs">
                     Hoàn thành
                   </Badge>
                 </div>
-                <div className="flex justify-between items-center text-sm">
-                  <span className="text-muted-foreground font-medium text-sm">
+                <div className="flex justify-between items-center py-2.5 border-b border-border/50 text-sm">
+                  <span className="text-muted-foreground">
                     Ngày {isReturn ? "trả" : "bán"}:
                   </span>
-                  <div className="flex items-center gap-2 bg-muted px-2 py-1 rounded-md text-xs">
+                  <div className="flex items-center gap-2 text-muted-foreground">
                     <span>{order.created_at}</span>
-                    <Calendar size={14} className="text-muted-foreground" />
+                    <Calendar size={14} />
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Payment Column */}
-            <div className="space-y-4">
-              <div className="flex items-center gap-2 text-primary font-bold border-b pb-2">
+            <div className="space-y-3 pl-2">
+              <div className="flex items-center gap-2 text-primary font-bold border-b border-border pb-2">
                 <CreditCard size={18} />
                 <span className="text-sm uppercase tracking-wide">
                   Thanh toán
                 </span>
               </div>
-              <div className="space-y-3">
-                <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground font-medium text-sm">
-                    Phương thức:
-                  </span>
-                  <span className="font-semibold text-green-600 text-right text-sm">
+              <div className="space-y-0">
+                <div className="flex justify-between items-center py-2.5 border-b border-border/50 text-sm">
+                  <span className="text-muted-foreground">Phương thức:</span>
+                  <span className="font-medium text-green-600 text-right">
                     {order.payment_method || "Tiền mặt"}
                   </span>
                 </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground font-medium text-sm">
-                    {isReturn ? "Tiền đã trả khách" : "Khách đã trả"}:
+                <div className="flex justify-between items-center py-2.5 border-b border-border/50 text-sm">
+                  <span className="text-muted-foreground">
+                    {isReturn ? "Tiền đã trả khách:" : "Khách đã trả:"}
                   </span>
-                  <span className="font-bold text-blue-600 text-right text-sm">
+                  <span className="font-bold text-blue-600 text-right">
                     {formatCurrency(order.paid_amount)}
                   </span>
                 </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground font-medium text-sm">
-                    Tiền trả lại:
-                  </span>
-                  <span className="font-bold text-right text-sm">
+                <div className="flex justify-between items-center py-2.5 border-b border-border/50 text-sm">
+                  <span className="text-muted-foreground">Tiền trả lại:</span>
+                  <span className="font-bold text-right">
                     -
                     {formatCurrency(
                       (order.final_amount || 0) - (order.paid_amount || 0),
