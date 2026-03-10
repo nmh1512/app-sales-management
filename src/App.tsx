@@ -23,6 +23,13 @@ import SupplierReturnFormPage from "./pages/inventory/SupplierReturnFormPage";
 import InventoryDisposalFormPage from "./pages/inventory/InventoryDisposalFormPage";
 import InventoryTransferFormPage from "./pages/inventory/InventoryTransferFormPage";
 import InventoryAuditFormPage from "./pages/inventory/InventoryAuditFormPage";
+import FinanceListPage from "./pages/finance/FinanceListPage";
+import CustomerListPage from "./pages/customers/CustomerListPage";
+import EmployeeListPage from "./pages/employees/EmployeeListPage";
+import BranchListPage from "./pages/branches/BranchListPage";
+import DailyReportPage from "./pages/reports/DailyReportPage";
+import SummaryReportPage from "./pages/reports/SummaryReportPage";
+import CustomerReportPage from "./pages/reports/CustomerReportPage";
 
 function AppLayout() {
   return (
@@ -93,6 +100,13 @@ function App() {
               path="/inventory-audits"
               element={<InventoryAuditListPage />}
             />
+            <Route path="/finance" element={<FinanceListPage />} />
+            <Route path="/customers" element={<CustomerListPage />} />
+            <Route path="/employees" element={<EmployeeListPage />} />
+            <Route path="/branches" element={<BranchListPage />} />
+            <Route path="/reports/daily" element={<DailyReportPage />} />
+            <Route path="/reports/summary" element={<SummaryReportPage />} />
+            <Route path="/reports/customers" element={<CustomerReportPage />} />
             <Route
               path="*"
               element={

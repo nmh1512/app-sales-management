@@ -19,6 +19,11 @@ import {
   Trash2,
   ArrowLeftRight,
   ClipboardCheck,
+  Wallet,
+  Users,
+  UserCog,
+  Building2,
+  BarChart2,
 } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
@@ -79,6 +84,28 @@ export function MainLayout({ children }: LayoutProps) {
         { label: "Kiểm kho", path: "/inventory-audits", icon: ClipboardCheck },
       ],
     },
+    { icon: Wallet, label: "Tài chính", path: "/finance" },
+    { icon: Users, label: "Khách hàng", path: "/customers" },
+    { icon: UserCog, label: "Nhân viên", path: "/employees" },
+    { icon: Building2, label: "Chi nhánh", path: "/branches" },
+    {
+      icon: BarChart2,
+      label: "Báo cáo",
+      subItems: [
+        { label: "Báo cáo ngày", path: "/reports/daily", icon: BarChart2 },
+        {
+          label: "Báo cáo tổng hợp",
+          path: "/reports/summary",
+          icon: BarChart2,
+        },
+        {
+          label: "Báo cáo KH.",
+          path: "/reports/customers",
+          icon: Users,
+        },
+      ],
+    },
+
     { icon: Settings, label: "Cài đặt", path: "/settings" },
   ];
 
