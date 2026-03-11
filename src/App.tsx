@@ -30,6 +30,9 @@ import BranchListPage from "./pages/branches/BranchListPage";
 import DailyReportPage from "./pages/reports/DailyReportPage";
 import SummaryReportPage from "./pages/reports/SummaryReportPage";
 import CustomerReportPage from "./pages/reports/CustomerReportPage";
+import SupplierReportPage from "./pages/reports/SupplierReportPage";
+import EmployeeReportPage from "./pages/reports/EmployeeReportPage";
+import ProductReportPage from "./pages/reports/ProductReportPage";
 
 function AppLayout() {
   return (
@@ -107,6 +110,9 @@ function App() {
             <Route path="/reports/daily" element={<DailyReportPage />} />
             <Route path="/reports/summary" element={<SummaryReportPage />} />
             <Route path="/reports/customers" element={<CustomerReportPage />} />
+            <Route path="/reports/suppliers" element={<SupplierReportPage />} />
+            <Route path="/reports/employees" element={<EmployeeReportPage />} />
+            <Route path="/reports/products" element={<ProductReportPage />} />
             <Route
               path="*"
               element={

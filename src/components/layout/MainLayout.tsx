@@ -103,6 +103,21 @@ export function MainLayout({ children }: LayoutProps) {
           path: "/reports/customers",
           icon: Users,
         },
+        {
+          label: "Báo cáo NCC.",
+          path: "/reports/suppliers",
+          icon: Users,
+        },
+        {
+          label: "Báo cáo NV.",
+          path: "/reports/employees",
+          icon: UserCog,
+        },
+        {
+          label: "Báo cáo SP.",
+          path: "/reports/products",
+          icon: BarChart2,
+        },
       ],
     },
 

@@ -33,25 +33,10 @@ import {
   Save,
   Users,
 } from "lucide-react";
+import { formatCurrency } from "@/lib/formatters";
+import type { Customer, CustomerForm, CustomerCategory } from "@/types/customers";
+import type { Gender } from "@/types/index";
 
-/* ───────── Types ───────── */
-type Gender = "Nam" | "Nữ" | "Khác";
-type Category = "Cá nhân" | "Doanh nghiệp";
-
-interface Customer {
-  id: number;
-  code: string;
-  name: string;
-  gender: Gender;
-  category: Category;
-  phone: string;
-  email: string;
-  address: string;
-  total_sales: number;
-  debt: number;
-  note: string;
-  created_at: string;
-}
 
 /* ───────── Mock data ───────── */
 const mockData: Customer[] = [
@@ -203,10 +188,10 @@ const genderBadge: Record<Gender, string> = {
   Khác: "bg-muted text-muted-foreground",
 };
 
-const defaultForm = {
+const defaultForm: CustomerForm = {
   name: "",
-  gender: "Nam" as Gender,
-  category: "Cá nhân" as Category,
+  gender: "Nam",
+  category: "Cá nhân",
   phone: "",
   email: "",
   address: "",
@@ -217,10 +202,7 @@ export default function CustomerListPage() {
   const [search, setSearch] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingItem, setEditingItem] = useState<Customer | null>(null);
-  const [form, setForm] = useState({ ...defaultForm });
-
-  const formatCurrency = (amount: number) =>
-    amount.toLocaleString("vi-VN") + " VNĐ";
+  const [form, setForm] = useState<CustomerForm>({ ...defaultForm });
 
   const filtered = mockData.filter(
     (r) =>
@@ -470,7 +452,7 @@ export default function CustomerListPage() {
                 <Select
                   value={form.category}
                   onValueChange={(v) =>
-                    setForm((f) => ({ ...f, category: v as Category }))
+                    setForm((f) => ({ ...f, category: v as CustomerCategory }))
                   }
                 >
                   <SelectTrigger className="h-10 border-border shadow-none focus:ring-1 text-sm">

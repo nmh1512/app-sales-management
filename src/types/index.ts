@@ -1,3 +1,5 @@
+export type Gender = "Nam" | "Nữ" | "Khác";
+
 export interface Stats {
   todayRevenue: number;
   totalRevenue: number;
@@ -99,4 +101,26 @@ export interface ReturnOrder {
   status: "completed" | "pending";
   seller_name: string;
   created_at: string;
+}
+
+export interface Branch {
+  id: number;
+  name: string;
+  phone1: string;
+  phone2: string;
+  email: string;
+  address: string;
+  ward: string;
+  active: boolean;
+  created_at: string;
+}
+
+export interface BranchForm {
+  name: string;
+  phone1: string;
+  phone2: string;
+  email: string;
+  address: string;
+  ward: string;
+  active: boolean;
 }

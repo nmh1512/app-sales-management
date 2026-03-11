@@ -13,15 +13,14 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { SearchInput } from "@/components/ui/search-input";
+import { formatCurrency } from "@/lib/formatters";
+import type { InventoryDisposal } from "@/types/inventory";
 
 export default function InventoryDisposalListPage() {
   const [search, setSearch] = useState("");
 
-  const formatCurrency = (amount: number) => {
-    return amount.toLocaleString("vi-VN") + " đ";
-  };
 
-  const mockData = [
+  const mockData: InventoryDisposal[] = [
     {
       id: 1,
       code: "XH000004",

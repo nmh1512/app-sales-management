@@ -13,15 +13,14 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { SearchInput } from "@/components/ui/search-input";
+import { formatNumber } from "@/lib/formatters";
+import type { InventoryAudit } from "@/types/inventory";
 
 export default function InventoryAuditListPage() {
   const [search, setSearch] = useState("");
 
-  const formatNumber = (num: number) => {
-    return num.toLocaleString("vi-VN", { minimumFractionDigits: 2 });
-  };
 
-  const mockData = [
+  const mockData: InventoryAudit[] = [
     {
       id: 1,
       code: "KK000574",

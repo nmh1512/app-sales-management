@@ -14,15 +14,13 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { SearchInput } from "@/components/ui/search-input";
 import { InventoryDetailModal } from "@/components/inventory/InventoryDetailModal";
+import { formatCurrency } from "@/lib/formatters";
+import type { SupplierReturn } from "@/types/inventory";
 
 export default function SupplierReturnListPage() {
   const [search, setSearch] = useState("");
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
-  const [selectedOrder, setSelectedOrder] = useState<any>(null);
-
-  const formatCurrency = (amount: number) => {
-    return amount.toLocaleString("vi-VN") + " đ";
-  };
+  const [selectedOrder, setSelectedOrder] = useState<SupplierReturn | null>(null);
 
   const mockData = [
     {
@@ -42,7 +40,7 @@ export default function SupplierReturnListPage() {
     },
   ];
 
-  const handleRowClick = (order: any) => {
+  const handleRowClick = (order: SupplierReturn) => {
     setSelectedOrder(order);
     setIsDetailModalOpen(true);
   };

@@ -33,6 +33,8 @@ import {
   TrendingUp,
   TrendingDown,
 } from "lucide-react";
+import { formatCurrency } from "@/lib/formatters";
+import type { FinanceTransaction, FinanceForm, TransactionType } from "@/types/finance";
 
 /* ───────── Mock data ───────── */
 const mockData = [
@@ -138,8 +140,8 @@ const mockData = [
 
 const SUBJECTS = ["Khách hàng", "Nhà cung cấp", "Nhân viên", "Khác"];
 
-const defaultForm = {
-  type: "receipt" as "receipt" | "payment",
+const defaultForm: FinanceForm = {
+  type: "receipt",
   subject: "",
   customer: "",
   date: new Date().toLocaleString("vi-VN", {
@@ -157,11 +159,8 @@ export default function FinanceListPage() {
   const [search, setSearch] = useState("");
   const [filterType, setFilterType] = useState<string>("all");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editingItem, setEditingItem] = useState<any>(null);
-  const [form, setForm] = useState({ ...defaultForm });
-
-  const formatCurrency = (amount: number) =>
-    amount.toLocaleString("vi-VN") + " đ";
+  const [editingItem, setEditingItem] = useState<FinanceTransaction | null>(null);
+  const [form, setForm] = useState<FinanceForm>({ ...defaultForm });
 
   const filtered = mockData.filter((r) => {
     const matchSearch =

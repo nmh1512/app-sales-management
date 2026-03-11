@@ -13,11 +13,12 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { SearchInput } from "@/components/ui/search-input";
+import type { InventoryTransfer } from "@/types/inventory";
 
 export default function InventoryTransferListPage() {
   const [search, setSearch] = useState("");
 
-  const mockData = [
+  const mockData: InventoryTransfer[] = [
     {
       id: 1,
       code: "CK000112",

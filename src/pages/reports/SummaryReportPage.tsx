@@ -33,6 +33,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import { formatCurrency, formatShort } from "@/lib/formatters";
 
 const revenueByMonth = [
   { month: 1, revenue: 2750000000 },
@@ -77,15 +78,6 @@ const topCustomers = [
   { name: "Tý Gold SG", phone: "1566516551", orders: 14, spent: 320400000 },
   { name: "Hoàng Minh SG", phone: "0909090906", orders: 12, spent: 285000000 },
 ];
-
-const formatCurrency = (v: number) =>
-  v.toLocaleString("vi-VN", { minimumFractionDigits: 2 }) + " VNĐ";
-
-const formatShort = (v: number) => {
-  if (v >= 1e9) return (v / 1e9).toFixed(1) + "B";
-  if (v >= 1e6) return (v / 1e6).toFixed(0) + "M";
-  return v.toString();
-};
 
 export default function SummaryReportPage() {
   const [period, setPeriod] = useState("year");

@@ -24,8 +24,10 @@ import {
   FileDown,
   Calendar,
 } from "lucide-react";
+import { formatCurrency } from "@/lib/formatters";
+import type { DailyOrderData } from "@/types/reports";
 
-const mockOrders = [
+const mockOrders: DailyOrderData[] = [
   {
     code: "DH008429",
     customer: "Hoàng Minh SG -(4)",
@@ -126,9 +128,6 @@ const mockOrders = [
     time: "15:41",
   },
 ];
-
-const formatCurrency = (v: number) =>
-  v.toLocaleString("vi-VN", { minimumFractionDigits: 2 }) + " VND";
 
 const sellers = ["Tất cả", "Admin", "Hà Tảo LK", "Nguyễn Văn B"];
 

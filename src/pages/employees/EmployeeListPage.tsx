@@ -26,23 +26,9 @@ import {
   UserCog,
   Phone,
 } from "lucide-react";
+import type { Employee, EmployeeForm, EmployeeRole } from "@/types/employees";
+import type { Gender } from "@/types/index";
 
-type Gender = "Nam" | "Nữ" | "Khác";
-type Role = "Quản lý" | "Nhân viên bán hàng" | "Nhân viên kho" | "Thu ngân";
-
-interface Employee {
-  id: number;
-  code: string;
-  full_name: string;
-  username: string;
-  phone: string;
-  roles: Role[];
-  dob: string;
-  gender: Gender;
-  active: boolean;
-  email: string;
-  address: string;
-}
 
 const mockData: Employee[] = [
   {
@@ -86,7 +72,7 @@ const mockData: Employee[] = [
   },
 ];
 
-const roleBadgeClass: Record<Role, string> = {
+const roleBadgeClass: Record<EmployeeRole, string> = {
   "Quản lý": "bg-blue-100 text-blue-700 dark:bg-blue-500/20 dark:text-blue-400",
   "Nhân viên bán hàng":
     "bg-green-100 text-green-700 dark:bg-green-500/20 dark:text-green-400",
@@ -102,15 +88,15 @@ const genderBadge: Record<Gender, string> = {
   Khác: "text-muted-foreground",
 };
 
-const defaultForm = {
+const defaultForm: EmployeeForm = {
   full_name: "",
   username: "",
   password: "",
   phone: "",
   email: "",
   dob: "",
-  gender: "Nam" as Gender,
-  roles: [] as Role[],
+  gender: "Nam",
+  roles: [],
   address: "",
   active: true,
 };
@@ -119,7 +105,7 @@ export default function EmployeeListPage() {
   const [search, setSearch] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingItem, setEditingItem] = useState<Employee | null>(null);
-  const [form, setForm] = useState({ ...defaultForm });
+  const [form, setForm] = useState<EmployeeForm>({ ...defaultForm });
 
   const filtered = mockData.filter(
     (r) =>
@@ -151,7 +137,7 @@ export default function EmployeeListPage() {
     setIsModalOpen(true);
   };
 
-  const toggleRole = (role: Role) => {
+  const toggleRole = (role: EmployeeRole) => {
     setForm((f) => ({
       ...f,
       roles: f.roles.includes(role)
@@ -468,7 +454,7 @@ export default function EmployeeListPage() {
                     "Nhân viên bán hàng",
                     "Nhân viên kho",
                     "Thu ngân",
-                  ] as Role[]
+                  ] as EmployeeRole[]
                 ).map((role) => (
                   <button
                     key={role}

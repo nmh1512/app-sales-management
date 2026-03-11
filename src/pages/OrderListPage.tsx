@@ -11,6 +11,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
+import { formatCurrency } from "@/lib/formatters";
 import type { Order } from "@/types";
 import { orderService } from "@/services/orderService";
 import { OrderDetailModal } from "@/components/orders/OrderDetailModal";
@@ -45,9 +46,6 @@ export default function OrderListPage() {
     { total: 0, discount: 0, final: 0, paid: 0 },
   );
 
-  const formatCurrency = (amount: number) => {
-    return amount.toLocaleString("vi-VN") + " đ";
-  };
 
   return (
     <div className="p-6 space-y-6">

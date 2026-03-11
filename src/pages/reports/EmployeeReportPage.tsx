@@ -12,232 +12,99 @@ import { useState, useMemo } from "react";
 import { cn } from "@/lib/utils";
 import Chart from "react-apexcharts";
 import { useChart } from "@/hooks/useChart";
+import { formatCurrency, formatNumber } from "@/lib/formatters";
 import {
+  SalesTable,
   ProfitTable,
   DebtTable,
-} from "./components/CustomerTables";
-import type { CustomerReportData } from "@/types/reports";
+} from "./components/EmployeeTables";
+import type { EmployeeReportData } from "@/types/reports";
 
-const mockCustomers: CustomerReportData[] = [
+const mockEmployees: EmployeeReportData[] = [
   {
-    id: "KH1756014389",
-    name: "C Nga - C Mơ",
-    revenue: 0,
+    id: "AD000001",
+    name: "Admin",
+    orderCount: 67,
+    revenue: 269252700,
     discount: 0,
-    paid: 0,
-    cost: 0,
-    profit: 0,
-    debtStart: 450000000,
-    debtIncrease: 0,
-    debtPaid: 0,
-    debtEnd: 450000000,
+    returnAmount: 23631000,
+    cost: 218596532.82,
+    profit: 50656167.18,
+    customerCount: 117,
+    debt: 3662820550,
   },
   {
-    id: "KH17560141445HM6F6",
-    name: "A Định PVT",
-    revenue: 18400000,
-    discount: 0,
-    paid: 0,
-    cost: 14882963.88,
-    profit: 3517036.12,
-    debtStart: 407630000,
-    debtIncrease: 18400000,
-    debtPaid: 0,
-    debtEnd: 426030000,
-  },
-  {
-    id: "KH1756014210EIVOCI",
-    name: "A Hùng Cường",
-    revenue: 80660000,
-    discount: 0,
-    paid: 0,
-    cost: 69657575.82,
-    profit: 11002424.18,
-    debtStart: 216517000,
-    debtIncrease: 80660000,
-    debtPaid: 0,
-    debtEnd: 297177000,
-  },
-  {
-    id: "KH1756014392",
-    name: "Rượu Hội Xuân",
-    revenue: 0,
-    discount: 0,
-    paid: 0,
-    cost: 0,
-    profit: 0,
-    debtStart: 205000000,
-    debtIncrease: 0,
-    debtPaid: 0,
-    debtEnd: 205000000,
-  },
-  {
-    id: "KH1756014420",
-    name: "Oai Lương",
-    revenue: 0,
-    discount: 0,
-    paid: 0,
-    cost: 0,
-    profit: 0,
-    debtStart: 197555000,
-    debtIncrease: 0,
-    debtPaid: 0,
-    debtEnd: 197555000,
-  },
-  {
-    id: "KH1756014475",
+    id: "NV000001",
     name: "Hà Táo LK",
-    revenue: 0,
+    orderCount: 13,
+    revenue: 14322000,
     discount: 0,
-    paid: 0,
-    cost: 0,
-    profit: 0,
-    debtStart: 195594000,
-    debtIncrease: 0,
-    debtPaid: 0,
-    debtEnd: 195594000,
-  },
-  {
-    id: "KH1756014264",
-    name: "C Hậu - MK",
-    revenue: 14120000,
-    discount: 0,
-    paid: 0,
-    cost: 10450058.45,
-    profit: 3669941.55,
-    debtStart: 139721700,
-    debtIncrease: 14120000,
-    debtPaid: -50000,
-    debtEnd: 153891700,
-  },
-  {
-    id: "KH1756014260SUQWAT",
-    name: "Trần Shoppe",
-    revenue: 4903500,
-    discount: 0,
-    paid: 0,
-    cost: 4505303.15,
-    profit: 398196.85,
-    debtStart: 105294400,
-    debtIncrease: 4903500,
-    debtPaid: 0,
-    debtEnd: 110197900,
-  },
-  {
-    id: "KH1756014552",
-    name: "Cao Minh Đạt- C Mơ",
-    revenue: 0,
-    discount: 0,
-    paid: 0,
-    cost: 0,
-    profit: 0,
-    debtStart: 0,
-    debtIncrease: 0,
-    debtPaid: -105000000,
-    debtEnd: 105000000,
-  },
-  {
-    id: "KH1756014463",
-    name: "Nghĩa 93",
-    revenue: 0,
-    discount: 0,
-    paid: 0,
-    cost: 0,
-    profit: 0,
-    debtStart: 100000000,
-    debtIncrease: 0,
-    debtPaid: 0,
-    debtEnd: 100000000,
-  },
-  {
-    id: "",
-    name: "Khách lẻ",
-    revenue: 570000,
-    discount: 0,
-    paid: 570000,
-    cost: 361991.19,
-    profit: 208008.81,
-    debtStart: 0,
-    debtIncrease: 0,
-    debtPaid: 570000,
-    debtEnd: 0,
-  },
-  {
-    id: "KH175601371581LLAV",
-    name: "Khắc Phương -(3)",
-    revenue: 4631000,
-    discount: 0,
-    paid: 0,
-    cost: 4135826.48,
-    profit: 495173.52,
-    debtStart: 0,
-    debtIncrease: 4631000,
-    debtPaid: 0,
-    debtEnd: 4631000,
-  },
-  {
-    id: "KH1756014261",
-    name: "Ngân Ellen-Mobile Pro",
-    revenue: 910000,
-    discount: 0,
-    paid: 0,
-    cost: 648734.75,
-    profit: 261265.25,
-    debtStart: 0,
-    debtIncrease: 910000,
-    debtPaid: 0,
-    debtEnd: 910000,
+    returnAmount: 7938000,
+    cost: 10668934.96,
+    profit: 3653065.04,
+    customerCount: 8,
+    debt: 17509000,
   },
 ];
 
-export default function CustomerReportPage() {
+export default function EmployeeReportPage() {
   const [viewMode, setViewMode] = useState<"chart" | "report">("report");
-  const [interest, setInterest] = useState<"profit" | "debt">("debt");
+  const [interest, setInterest] = useState<"sales" | "profit" | "debt">("profit");
 
+  // rerender-derived-state-no-effect: Calculate totals directly
   const totals = useMemo(() => {
-    return mockCustomers.reduce(
-      (acc, c) => ({
-        revenue: acc.revenue + c.revenue,
-        discount: acc.discount + c.discount,
-        paid: acc.paid + c.paid,
-        cost: acc.cost + c.cost,
-        profit: acc.profit + c.profit,
-        debtStart: acc.debtStart + c.debtStart,
-        debtIncrease: acc.debtIncrease + c.debtIncrease,
-        debtPaid: acc.debtPaid + c.debtPaid,
-        debtEnd: acc.debtEnd + c.debtEnd,
+    return mockEmployees.reduce(
+      (acc, s) => ({
+        orderCount: acc.orderCount + s.orderCount,
+        revenue: acc.revenue + s.revenue,
+        discount: acc.discount + s.discount,
+        returnAmount: acc.returnAmount + s.returnAmount,
+        cost: acc.cost + s.cost,
+        profit: acc.profit + s.profit,
+        customerCount: acc.customerCount + s.customerCount,
+        debt: acc.debt + s.debt,
       }),
       {
+        orderCount: 0,
         revenue: 0,
         discount: 0,
-        paid: 0,
+        returnAmount: 0,
         cost: 0,
         profit: 0,
-        debtStart: 0,
-        debtIncrease: 0,
-        debtPaid: 0,
-        debtEnd: 0,
+        customerCount: 0,
+        debt: 0,
       },
     );
   }, []);
 
+  const titlePrefix = viewMode === "chart" ? "Biểu đồ top 10 nhân viên" : "Báo cáo chi tiết nhân viên";
+  const interestLabel = {
+    sales: "bán hàng tốt nhất",
+    profit: "có lợi nhuận cao nhất",
+    debt: "có công nợ cao nhất",
+  };
+  const title = viewMode === "chart" ? `${titlePrefix} ${interestLabel[interest]}` : titlePrefix;
+
+  // Prepare chart data based on selected interest
   const chartData = useMemo(() => {
-    const getValue = (c: CustomerReportData) => {
+    const getValue = (e: EmployeeReportData) => {
       switch (interest) {
-        case "profit": return c.profit;
-        case "debt": return c.debtEnd;
+        case "sales": return e.revenue;
+        case "profit": return e.profit;
+        case "debt": return e.debt;
         default: return 0;
       }
     };
 
-    return [...mockCustomers]
-      .filter((c) => getValue(c) > 0)
+    return [...mockEmployees]
+      .filter((e) => getValue(e) > 0)
       .sort((a, b) => getValue(b) - getValue(a))
       .slice(0, 10)
-      .map((c) => ({ label: c.name, value: getValue(c) }));
+      .map((e) => ({ label: e.name, value: getValue(e) }));
   }, [interest]);
 
   const seriesNameMap = {
+    sales: "Doanh thu",
     profit: "Lợi nhuận",
     debt: "Công nợ",
   };
@@ -247,15 +114,6 @@ export default function CustomerReportPage() {
     seriesName: seriesNameMap[interest],
     horizontal: true,
   });
-
-  const titlePrefix = viewMode === "chart" ? "Biểu đồ top 10 khách hàng" : "Báo cáo";
-  const interestLabel = {
-    profit: "đem lại lợi nhuận cao nhất",
-    debt: "có công nợ lớn nhất",
-  };
-  const title = viewMode === "chart" 
-    ? `${titlePrefix} ${interestLabel[interest]}` 
-    : `${titlePrefix} ${interest === 'profit' ? 'lợi nhuận theo' : 'công nợ'} khách hàng`;
 
   return (
     <div className="p-6 space-y-6 bg-background min-h-screen">
@@ -300,8 +158,9 @@ export default function CustomerReportPage() {
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
+              <SelectItem value="sales">Bán hàng</SelectItem>
               <SelectItem value="profit">Lợi nhuận</SelectItem>
-              <SelectItem value="debt">Công nợ</SelectItem>
+              <SelectItem value="debt">Công nợ khách hàng</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -350,8 +209,9 @@ export default function CustomerReportPage() {
             </div>
           ) : (
             <div className="overflow-x-auto -mx-6">
-              {interest === "profit" && <ProfitTable data={mockCustomers} totals={totals} />}
-              {interest === "debt" && <DebtTable data={mockCustomers} totals={totals} />}
+              {interest === "sales" && <SalesTable data={mockEmployees} totals={totals} />}
+              {interest === "profit" && <ProfitTable data={mockEmployees} totals={totals} />}
+              {interest === "debt" && <DebtTable data={mockEmployees} totals={totals} />}
             </div>
           )}
         </div>

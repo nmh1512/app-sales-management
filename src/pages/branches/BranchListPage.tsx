@@ -29,18 +29,8 @@ import {
   Mail,
   MapPin,
 } from "lucide-react";
+import type { Branch, BranchForm } from "@/types";
 
-interface Branch {
-  id: number;
-  name: string;
-  phone1: string;
-  phone2: string;
-  email: string;
-  address: string;
-  ward: string;
-  active: boolean;
-  created_at: string;
-}
 
 const mockData: Branch[] = [
   {
@@ -78,7 +68,7 @@ const mockData: Branch[] = [
   },
 ];
 
-const defaultForm = {
+const defaultForm: BranchForm = {
   name: "",
   phone1: "",
   phone2: "",
@@ -92,7 +82,7 @@ export default function BranchListPage() {
   const [search, setSearch] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingItem, setEditingItem] = useState<Branch | null>(null);
-  const [form, setForm] = useState({ ...defaultForm });
+  const [form, setForm] = useState<BranchForm>({ ...defaultForm });
 
   const filtered = mockData.filter(
     (r) =>

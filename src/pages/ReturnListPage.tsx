@@ -10,6 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { formatCurrency } from "@/lib/formatters";
 import type { ReturnOrder, Order } from "@/types";
 import { returnService } from "@/services/returnService";
 import { OrderDetailModal } from "@/components/orders/OrderDetailModal";
@@ -38,9 +39,6 @@ export default function ReturnListPage() {
         r.order_code.toLowerCase().includes(search.toLowerCase())),
   );
 
-  const formatCurrency = (amount: number) => {
-    return amount.toLocaleString("vi-VN") + " đ";
-  };
 
   // Map ReturnOrder to Order-like structure for the modal
   const mappedOrder: Partial<Order> | null = selectedReturn
