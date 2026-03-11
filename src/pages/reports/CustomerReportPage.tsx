@@ -311,19 +311,7 @@ export default function CustomerReportPage() {
             Thời gian
           </label>
           <div className="flex gap-2">
-            <Select defaultValue="quick">
-              <SelectTrigger className="w-36 h-9 border-border shadow-none text-sm focus:ring-1">
-                <SelectValue placeholder="Chọn nhanh" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="quick">Chọn nhanh</SelectItem>
-                <SelectItem value="today">Hôm nay</SelectItem>
-                <SelectItem value="yesterday">Hôm qua</SelectItem>
-                <SelectItem value="this-week">Tuần này</SelectItem>
-                <SelectItem value="this-month">Tháng này</SelectItem>
-              </SelectContent>
-            </Select>
-            <DateRangePicker />
+          <DateRangePicker />
           </div>
         </div>
       </div>
